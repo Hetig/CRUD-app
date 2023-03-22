@@ -1,0 +1,41 @@
+﻿@model OrderItemViewModel
+
+<div class="row">
+	<div class="col-3" style="align-content:center">
+		<form method="post">
+
+			<div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
+
+			<div class="container">
+
+				<div>
+					<input type="text" asp-for="Name" class="form-control" placeholder="Название">
+					<span asp-validation-for="Name" style="color:red"></span>
+				</div>
+
+				<br>
+
+				<div>
+					<input type="number" step="any" asp-for="Quantity" class="form-control" placeholder="Количество">
+					<span asp-validation-for="Quantity" style="color:red"></span>
+				</div>
+
+				<br>
+
+				<div>
+					<input type="text" asp-for="Unit" class="form-control" placeholder="Единица измерения">
+					<span asp-validation-for="Unit" style="color:red"></span>
+				</div>
+
+				<br>
+
+				<div>
+					<input type="number" asp-for="OrderId" class="form-control" value="@ViewBag.OrderId" type="hidden">
+					<span asp-validation-for="OrderId" style="color:red"></span>
+				</div>
+
+				<button type="submit" class="btn btn-success" style="width:150px; height:35px" asp-controller="Home" asp-action="AddItem">Добавить</button>
+			</div>
+		</form>
+	</div>
+</div>

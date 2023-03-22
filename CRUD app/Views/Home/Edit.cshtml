@@ -1,0 +1,33 @@
+﻿@model OrderViewModel
+
+<div class="row">
+	<div class="col-3">
+		<form method="post">
+
+			<div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
+
+			<div class="container">
+
+				<div>
+					<input type="text" asp-for="Number" class="form-control" placeholder="Номер заказа">
+					<span asp-validation-for="Number" style="color:red"></span>
+				</div>
+
+				<br>
+
+				<div>
+					<input type="date" asp-for="Date" class="form-control" placeholder="Дата">
+					<span asp-validation-for="Date" style="color:red"></span>
+				</div>
+
+				<br>
+
+				<div>
+					<input type="number" asp-for="Id" class="form-control" value="@ViewBag.OrderId" type="hidden">
+				</div>
+
+				<button type="submit" class="btn btn-success" style="width:150px; height:35px" asp-controller="Home" asp-action="Edit">Редактировать</button>
+			</div>
+		</form>
+	</div>
+</div>

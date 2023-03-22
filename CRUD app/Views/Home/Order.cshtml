@@ -1,0 +1,74 @@
+﻿@model OrderInfoViewModel
+
+<div class="row">
+	<div class="col-3">
+		<div class="card" style=" width: 300px">
+			<h5 style="text-align:center">Информация о заказе</h5>
+			<h6 style="margin-left: 5px">ID: @Model.Order.Id</h6>
+			<h6 style="margin-left: 5px">Number: @Model.Order.Number</h6>
+			<h6 style="margin-left: 5px">Date: @Model.Order.Date.ToString("d")</h6>
+			<h6 style="margin-left: 5px">Provider: @Model.Order.Provider.Name</h6>
+			<a type="button" class="btn btn-danger" style="height:35px; margin:10px" asp-controller="Home" asp-action="Delete" asp-route-orderId="@Model.Order.Id">Удалить заказ</a>
+			<a type="button" class="btn btn-dark" style="height:35px; margin:10px" asp-controller="Home" asp-action="Edit" asp-route-orderId="@Model.Order.Id">Реадактировать заказ</a>
+			<div class="dropdown" style="margin:10px">
+				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+					Выбрать поставщика
+				</button>
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+					@foreach (var provider in Model.Providers)
+					{
+						<li><a class="dropdown-item" asp-controller="Home" asp-action="ChangeProvider" asp-route-orderId="@Model.Order.Id" asp-route-providerId="@provider.Id">@provider.Name</a></li>
+					}
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-9">
+		<div class="card">
+			@if (Model.Items.Count == 0 || Model.Items == null)
+			{
+				<h5 style="text-align:center">Нет товаров в заказе</h5>
+			}
+			else
+			{
+				<div class="card" style="margin: 20px">
+
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">ID</th>
+								<th scope="col">Name</th>
+								<th scope="col">Quantity</th>
+								<th scope="col">Unit</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var item in Model.Items)
+							{
+								<tr>
+									<th>@item.Id</th>
+									<th>@item.Name</th>
+									<th>@item.Quantity</th>
+									<th>@item.Unit</th>
+									<th>
+										<a type="button" class="btn btn-dark" style="height:35px; width:150px; margin:10px"
+								   asp-controller="Home" asp-action="DeleteItem" asp-route-orderId="@Model.Order.Id"
+								   asp-route-itemId="@item.Id">
+											Удалить
+										</a>
+									</th>
+								</tr>
+							}
+						</tbody>
+					</table>
+
+				</div>
+			}
+			<a type="button" class="btn btn-dark" style="height:35px; width:150px; margin:10px" asp-controller="Home" asp-action="AddItem" asp-route-orderId="@Model.Order.Id">Добавить товар в заказ</a>
+		</div>
+	</div>
+</div>
+
+

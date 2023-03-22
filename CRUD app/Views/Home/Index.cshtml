@@ -1,0 +1,60 @@
+﻿@model IndexViewModel
+
+<div class="row">
+	
+		<div class="col-4">
+			<form method="post">
+				<div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
+
+				<div class="card" style="height: 300px">
+					<div style="margin:4px; text-align:center">
+						<h5>Фильтрация по дате</h5>
+					</div>
+					<div style="margin:15px">
+						<label>От</label>
+						<input type="date" asp-for="Filters.StartingDate" style="width:125px" class="form-control">
+						<span asp-validation-for="Filters.StartingDate" style="color:red"></span>
+					</div>
+					<div style="margin:15px">
+						<label>До</label>
+						<input type="date" asp-for="Filters.EndDate" style="width:125px" class="form-control">
+						<span asp-validation-for="Filters.EndDate" style="color:red"></span>
+					</div>
+					<button type="submit" style="margin:10px" class="btn btn-dark" style="width:150px; height:35px" asp-controller="Home" asp-action="SortForDate">
+						Применить
+					</button>
+				</div>
+			</form>
+		</div>
+
+
+
+		<div class="col-8">
+			<div class="card">
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">ID</th>
+							<th scope="col">Number</th>
+							<th scope="col">Date</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var order in Model.Orders)
+						{
+							<tr>
+								<th>
+									<a asp-controller="Home" asp-action="Order" asp-route-orderId="@order.Id">@order.Id</a>
+								</th>
+								<th>@order.Number</th>
+								<th>@order.Date.ToString("d")</th>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+			<br>
+			<a type="button" class="btn btn-dark" style="width:150px; height:35px" asp-controller="Home" asp-action="Add">Добавить заказ</a>
+		</div>
+	
+</div>
